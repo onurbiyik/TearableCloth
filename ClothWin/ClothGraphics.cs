@@ -19,8 +19,10 @@ namespace ClothWin
         private static void DrawPoint(Graphics graphics, Point point)
         {
             var rad = 2;
-            var halfRad = rad / 2;
-            graphics.FillEllipse(Brushes.LawnGreen, (float)point.x - halfRad, (float)point.y - halfRad, rad, rad);
+            // var halfRad = rad / 2;
+            // graphics.FillEllipse(Brushes.LawnGreen, (float)point.x - halfRad, (float)point.y - halfRad, rad, rad);
+
+            graphics.FillRectangle(Brushes.LawnGreen, point.x - 1, point.y - 1, rad, rad);
 
             var i = point.Constraints.Count;
             while (i-- > 0)
@@ -39,7 +41,7 @@ namespace ClothWin
 
             var pen = GetPen(constraint.CompressionRatio);
             
-            graphics.DrawLine(pen, (float)p1.x, (float)p1.y, (float)p2.x, (float)p2.y);
+            graphics.DrawLine(pen, p1.x, p1.y, p2.x, p2.y);
         }
 
         private static Pen GetPen(double compressionRatio)

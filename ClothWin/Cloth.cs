@@ -5,17 +5,19 @@ namespace ClothWin
 {
     internal class Cloth
     {
-        public List<Point> Points = new List<Point>();
+        internal readonly IEnumerable<Point> Points;
 
 
         public Cloth(float canvasWidth)
         {
-            DrawCurtain(canvasWidth);
+            this.Points = DrawCurtain(canvasWidth);
 
         }
 
-        private void DrawPendulum(float canvasWidth)
+        private IEnumerable<Point> DrawPendulum(float canvasWidth)
         {
+            var result = new List<Point>();
+
             Point prevoiusPoint = null;
 
             for (int i = 0; i < 30; i++)
@@ -32,17 +34,19 @@ namespace ClothWin
                 else
                     p.Attach(prevoiusPoint);
 
-                this.Points.Add(p);
+                result.Add(p);
 
                 prevoiusPoint = p;
             }
 
-            
+            return result;
         }
 
 
-        private void DrawCurtain(float canvasWidth)
+        private IEnumerable<Point> DrawCurtain(float canvasWidth)
         {
+            var result = new List<Point>();
+
             const int Spacing = 7; // 7;
             const int ClothWidth = 50; // 50;
             const int ClothHeight = 30; // 30;
@@ -60,12 +64,14 @@ namespace ClothWin
                     var p = new Point(posX, posY);
 
                     if (y == 0) p.Pin(posX, posY);
-                    if (y != 0) p.Attach(this.Points[x + (y - 1)*(ClothWidth + 1)]);
-                    if (x != 0) p.Attach(this.Points[this.Points.Count - 1]);
+                    if (y != 0) p.Attach(result[x + (y - 1)*(ClothWidth + 1)]);
+                    if (x != 0) p.Attach(result[result.Count - 1]);
 
-                    this.Points.Add(p);
+                    result.Add(p);
                 }
             }
+
+            return result;
         }
 
         public void Update(Mouse mouse, float boundsx, float boundsy)

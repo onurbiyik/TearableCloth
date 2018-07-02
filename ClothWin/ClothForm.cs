@@ -53,6 +53,7 @@ namespace ClothWin
         protected override void OnPaint(PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            
             ClothGraphics.DrawCloth(e.Graphics, _cloth);
             base.OnPaint(e);
         }
