@@ -7,7 +7,7 @@ namespace ClothWin
     {
         public static void DrawCloth(Graphics graphics, Cloth cloth)
         {
-            graphics.Clear(Color.FromArgb(51,51,51));
+            graphics.Clear(Color.Black);
 
             foreach (var point in cloth.Points)
             {
@@ -22,7 +22,7 @@ namespace ClothWin
             // var halfRad = rad / 2;
             // graphics.FillEllipse(Brushes.LawnGreen, (float)point.x - halfRad, (float)point.y - halfRad, rad, rad);
 
-            graphics.FillRectangle(Brushes.LawnGreen, point.x - 1, point.y - 1, rad, rad);
+            graphics.FillRectangle(Brushes.BlanchedAlmond, point.x - 1, point.y - 1, rad, rad);
 
             var i = point.Constraints.Count;
             while (i-- > 0)
@@ -46,6 +46,8 @@ namespace ClothWin
 
         private static Pen GetPen(double compressionRatio)
         {
+            return Pens.Silver;
+
             if (compressionRatio > 1.35)
                 return Pens.Red;
             if (compressionRatio > 1.15)

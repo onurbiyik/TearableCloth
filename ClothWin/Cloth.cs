@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Threading.Tasks;
 
 namespace ClothWin
@@ -48,11 +49,13 @@ namespace ClothWin
             var result = new List<Point>();
 
             const int Spacing = 7; // 7;
-            const int ClothWidth = 50; // 50;
-            const int ClothHeight = 30; // 30;
+            const int ClothWidth = 40; // 50;
+            const int ClothHeight = 40; // 30;
         
             const int StartY = 20;
             var startX = canvasWidth/2 - ClothWidth*Spacing/2;
+
+            var randomizer = new System.Random();
 
             for (var y = 0; y <= ClothHeight; y++)
             {
@@ -64,19 +67,26 @@ namespace ClothWin
                     var p = new Point(posX, posY);
 
                     if (y == 0) p.Pin(posX, posY);
-                    if (y != 0) p.Attach(result[x + (y - 1)*(ClothWidth + 1)]);
-                    if (x != 0) p.Attach(result[result.Count - 1]);
+
+                    var rand1 = randomizer.NextDouble() < 0.995;
+                    var rand2 = randomizer.NextDouble() < 0.97;
+
+                    if (y != 0 && rand1) p.Attach(result[x + (y - 1)*(ClothWidth + 1)]);
+                    if (x != 0 && (y < ClothHeight - 2 || !rand1) && rand2) p.Attach(result[result.Count - 1]);
+
 
                     result.Add(p);
                 }
             }
 
-            return result;
+            var builder = ImmutableArray.CreateBuilder<Point>();
+            builder.AddRange(result);
+            return builder.ToImmutableArray();
         }
 
         public void Update(Mouse mouse, float boundsx, float boundsy)
         {
-            const int physicsAccuracy = 5;
+            const int physicsAccuracy = 8;
 
             foreach (var point in Points)
             {
@@ -84,16 +94,18 @@ namespace ClothWin
             }
             // Parallel.ForEach(Points, point => point.Update(mouse));
 
+
             for (var i = 0; i < physicsAccuracy; i++)
             {
-                foreach (var point in Points)
-                {
-                    point.ResolveConstraints(boundsx, boundsy);
-                }
+                //foreach (var point in Points)
+                //{
+                //    point.ResolveConstraints(boundsx, boundsy);
+                //}
 
-                //Parallel.ForEach(Points, point => point.ResolveConstraints(boundsx, boundsy));
+                Parallel.ForEach(Points, point => point.ResolveConstraints(boundsx, boundsy));
                 
             }
+
             
         }
 

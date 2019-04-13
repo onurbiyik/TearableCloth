@@ -32,9 +32,10 @@
             // 
             // ClothForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 428);
+            this.ClientSize = new System.Drawing.Size(1501, 872);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ClothForm";
             this.Text = "Cloth";
             this.Load += new System.EventHandler(this.ClothForm_Load);

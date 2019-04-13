@@ -26,15 +26,21 @@ namespace ClothWin
             
             _cloth = new Cloth(this.Width);
 
-            var updateTimer = new System.Timers.Timer();
-            updateTimer.Elapsed += UpdateCloth;
-            updateTimer.Interval = 2; //ms
-            updateTimer.Start();
+            var physicsTimer = new System.Timers.Timer();
+            physicsTimer.Elapsed += PhysicsTimer_Tick;
+            physicsTimer.Interval = 10; //ms
+            physicsTimer.Start();
+
+
+            var paintTimer = new System.Timers.Timer();
+            paintTimer.Elapsed += PaintTimer_Tick;
+            paintTimer.Interval = 30; //ms
+            paintTimer.Start();
 
         }
 
 
-        private void UpdateCloth(object sender, EventArgs eventArgs)
+        private void PhysicsTimer_Tick(object sender, EventArgs eventArgs)
         {
             if (this.ClientSize.IsEmpty)
                 return;
@@ -43,8 +49,13 @@ namespace ClothWin
             var boundsy = this.ClientSize.Height - 20;
 
             _cloth.Update(_mouse, boundsx, boundsy);
+        }
 
-            // if (new Random().Next(100) < 10)
+        private void PaintTimer_Tick(object sender, EventArgs eventArgs)
+        {
+            if (this.ClientSize.IsEmpty)
+                return;
+
             this.Invalidate();
 
         }
