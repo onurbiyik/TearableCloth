@@ -58,7 +58,7 @@ namespace ClothWin
                 }
             }
 
-            const float gravity = 0.1124f;
+            const float gravity = 0.1624f;
             const float friction = 0.9999f;
 
             var newX = x + ((x - prevX) * friction) + 0;

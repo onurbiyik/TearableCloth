@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Drawing.Drawing2D;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace ClothWin
@@ -7,6 +9,8 @@ namespace ClothWin
     public sealed partial class ClothForm : Form
     {
         private Cloth _cloth;
+        private System.Timers.Timer physicsTimer;
+        private System.Timers.Timer paintTimer;
 
         public ClothForm()
         {
@@ -26,15 +30,15 @@ namespace ClothWin
             
             _cloth = new Cloth(this.Width);
 
-            var physicsTimer = new System.Timers.Timer();
+            physicsTimer = new System.Timers.Timer();
             physicsTimer.Elapsed += PhysicsTimer_Tick;
             physicsTimer.Interval = 10; //ms
             physicsTimer.Start();
 
 
-            var paintTimer = new System.Timers.Timer();
+            paintTimer = new System.Timers.Timer();
             paintTimer.Elapsed += PaintTimer_Tick;
-            paintTimer.Interval = 30; //ms
+            paintTimer.Interval = 15; //ms
             paintTimer.Start();
 
         }
@@ -63,6 +67,8 @@ namespace ClothWin
 
         protected override void OnPaint(PaintEventArgs e)
         {
+            Contract.Requires(e != null);
+            
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             
             ClothGraphics.DrawCloth(e.Graphics, _cloth);
@@ -98,11 +104,6 @@ namespace ClothWin
             _mouse.py = _mouse.y;
             _mouse.x = e.X;
             _mouse.y = e.Y;
-
         }
-
-       
-
-
     }
 }

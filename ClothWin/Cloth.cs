@@ -50,7 +50,7 @@ namespace ClothWin
 
             const int Spacing = 7; // 7;
             const int ClothWidth = 40; // 50;
-            const int ClothHeight = 40; // 30;
+            const int ClothHeight = 30; // 30;
         
             const int StartY = 20;
             var startX = canvasWidth/2 - ClothWidth*Spacing/2;
@@ -86,7 +86,7 @@ namespace ClothWin
 
         public void Update(Mouse mouse, float boundsx, float boundsy)
         {
-            const int physicsAccuracy = 8;
+            const int physicsAccuracy = 7;
 
             foreach (var point in Points)
             {
@@ -97,16 +97,12 @@ namespace ClothWin
 
             for (var i = 0; i < physicsAccuracy; i++)
             {
-                //foreach (var point in Points)
-                //{
-                //    point.ResolveConstraints(boundsx, boundsy);
-                //}
-
-                Parallel.ForEach(Points, point => point.ResolveConstraints(boundsx, boundsy));
-                
-            }
-
-            
+                foreach (var point in Points)
+                {
+                    point.ResolveConstraints(boundsx, boundsy);
+                }
+                // Parallel.ForEach(Points, point => point.ResolveConstraints(boundsx, boundsy));
+            }            
         }
 
         

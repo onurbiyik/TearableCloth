@@ -22,7 +22,9 @@ namespace ClothWin
             // var halfRad = rad / 2;
             // graphics.FillEllipse(Brushes.LawnGreen, (float)point.x - halfRad, (float)point.y - halfRad, rad, rad);
 
-            graphics.FillRectangle(Brushes.BlanchedAlmond, point.x - 1, point.y - 1, rad, rad);
+            //graphics.FillRectangle(Brushes.BlanchedAlmond, point.x - 1, point.y - 1, rad, rad);
+            graphics.DrawRectangle(Pens.BlanchedAlmond, point.x, point.y, 1.0f, 1.0f);
+
 
             var i = point.Constraints.Count;
             while (i-- > 0)
@@ -46,7 +48,7 @@ namespace ClothWin
 
         private static Pen GetPen(double compressionRatio)
         {
-            return Pens.Silver;
+            return new Pen(ColorFromHSLA(compressionRatio-0.5, compressionRatio - 0.5, 0.6, 1.0));
 
             if (compressionRatio > 1.35)
                 return Pens.Red;
@@ -57,7 +59,6 @@ namespace ClothWin
             if (compressionRatio < 0.95)
                 return Pens.CornflowerBlue;
 
-            return Pens.Silver;
         }
 
         // Given H,S,L,A in range of 0-1
