@@ -2,7 +2,7 @@
 
 namespace ClothWin
 {
-    public class Mouse
+    public struct Mouse
     {
         public bool Down { get; set; }
 

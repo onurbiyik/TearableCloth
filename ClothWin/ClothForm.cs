@@ -81,7 +81,7 @@ namespace ClothWin
         }
 
 
-        private readonly Mouse _mouse = new Mouse();
+        private Mouse _mouse = new Mouse();
 
         private void ClothForm_MouseDown(object sender, MouseEventArgs e)
         {       
