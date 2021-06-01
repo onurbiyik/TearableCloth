@@ -9,8 +9,8 @@ namespace ClothWin
     public sealed partial class ClothForm : Form
     {
         private Cloth _cloth;
-        private System.Timers.Timer physicsTimer;
-        private System.Timers.Timer paintTimer;
+        private System.Timers.Timer _physicsTimer;
+        private System.Timers.Timer _paintTimer;
 
         public ClothForm()
         {
@@ -30,16 +30,17 @@ namespace ClothWin
             
             _cloth = new Cloth(this.Width);
 
-            physicsTimer = new System.Timers.Timer();
-            physicsTimer.Elapsed += PhysicsTimer_Tick;
-            physicsTimer.Interval = 10; //ms
-            physicsTimer.Start();
+            _physicsTimer = new System.Timers.Timer();
+            _physicsTimer.Elapsed += PhysicsTimer_Tick;
+            _physicsTimer.Interval = 10; //ms
+            _physicsTimer.Start();
 
 
-            paintTimer = new System.Timers.Timer();
-            paintTimer.Elapsed += PaintTimer_Tick;
-            paintTimer.Interval = 15; //ms
-            paintTimer.Start();
+            _paintTimer = new System.Timers.Timer();
+            _paintTimer.Elapsed += PaintTimer_Tick;
+            _paintTimer.Interval = 5; //ms
+            _paintTimer.AutoReset = false;
+            _paintTimer.Start();
 
         }
 
@@ -57,11 +58,13 @@ namespace ClothWin
 
         private void PaintTimer_Tick(object sender, EventArgs eventArgs)
         {
-            if (this.ClientSize.IsEmpty)
-                return;
+            while (true)
+            {
+                if (this.ClientSize.IsEmpty)
+                    return;
 
-            this.Invalidate();
-
+                this.Invalidate();
+            }
         }
 
 
@@ -81,7 +84,7 @@ namespace ClothWin
         }
 
 
-        private Mouse _mouse = new Mouse();
+        private Mouse _mouse = new();
 
         private void ClothForm_MouseDown(object sender, MouseEventArgs e)
         {       

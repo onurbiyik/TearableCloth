@@ -18,8 +18,8 @@
                 components.Dispose();
             }
 
-            this.paintTimer.Dispose();
-            this.physicsTimer.Dispose();
+            this._paintTimer.Dispose();
+            this._physicsTimer.Dispose();
 
             base.Dispose(disposing);
         }

@@ -19,7 +19,7 @@ namespace ClothWin
         {
             var result = new List<Point>();
 
-            Point prevoiusPoint = null;
+            Point? prevoiusPoint = null;
 
             for (int i = 0; i < 30; i++)
             {
@@ -49,8 +49,8 @@ namespace ClothWin
             var result = new List<Point>();
 
             const int Spacing = 7; // 7;
-            const int ClothWidth = 40; // 50;
-            const int ClothHeight = 30; // 30;
+            const int ClothWidth = 80; // 50;
+            const int ClothHeight = 60; // 30;
         
             const int StartY = 20;
             var startX = canvasWidth/2 - ClothWidth*Spacing/2;
