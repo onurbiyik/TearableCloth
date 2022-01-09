@@ -48,9 +48,9 @@ namespace ClothWin
         {
             var result = new List<Point>();
 
-            const int Spacing = 7; // 7;
-            const int ClothWidth = 80; // 50;
-            const int ClothHeight = 60; // 30;
+            const int Spacing = 17; // 7;
+            const int ClothWidth = 40; // 50;
+            const int ClothHeight = 20; // 30;
         
             const int StartY = 20;
             var startX = canvasWidth/2 - ClothWidth*Spacing/2;
@@ -86,7 +86,7 @@ namespace ClothWin
 
         public void Update(Mouse mouse, float boundsx, float boundsy)
         {
-            const int physicsAccuracy = 7;
+            const int physicsAccuracy = 5;
 
             foreach (var point in Points)
             {

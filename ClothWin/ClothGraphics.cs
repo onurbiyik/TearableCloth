@@ -48,7 +48,7 @@ namespace ClothWin
 
         private static Pen GetPen(double compressionRatio)
         {
-            return new Pen(ColorFromHSLA(compressionRatio-0.5, compressionRatio - 0.5, 0.6, 1.0));
+            // return new Pen(ColorFromHSLA(compressionRatio-0.5, compressionRatio - 0.5, 0.6, 1.0));
 
             if (compressionRatio > 1.35)
                 return Pens.Red;
@@ -58,6 +58,9 @@ namespace ClothWin
                 return Pens.Blue;
             if (compressionRatio < 0.95)
                 return Pens.CornflowerBlue;
+            else
+                return Pens.White;
+            
 
         }
 
